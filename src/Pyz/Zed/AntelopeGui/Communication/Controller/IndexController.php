@@ -11,20 +11,19 @@ class IndexController extends AbstractController
 {
     public function indexAction()
     {
-        // TODO-1: Get an instance of the AntelopeTable by using the `getFactory()`-method
-        $table = null;
+        $table = $this->getFactory()
+            ->createAntelopeTable();
 
-        // TODO-2: Use the `viewResponse()`-method to return a rendered 'antelopeTable'
-        // Hint-1: Use 'antelopeTable' as key for the passed array
-        // Hint-2: The class AbstractTable provides a method `render()`
+        return $this->viewResponse([
+            'antelopeTable' => $table->render(),
+        ]);
     }
 
     public function tableAction()
     {
-        // TODO-3: Get an instance of the AntelopeTable by using the `getFactory()`-method
-        $table = null;
+        $table = $this->getFactory()
+            ->createAntelopeTable();
 
-        // TODO-4: Return a json-response with the table data
-        // Hint-1: The class AbstractTable provides a method `fetchData()`
+        return $this->jsonResponse($table->fetchData());
     }
 }

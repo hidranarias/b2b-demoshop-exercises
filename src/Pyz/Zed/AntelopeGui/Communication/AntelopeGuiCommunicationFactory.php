@@ -13,27 +13,25 @@ use Symfony\Component\Form\FormInterface;
 
 class AntelopeGuiCommunicationFactory extends AbstractCommunicationFactory
 {
-    // (For the Table part of the exercise)
-    // TODO-1: Instantiate the AntelopeTable with the right dependency and return it
-    // Hint-1: Naming convention for methods instantiating classes would be the class name prefixed by "create"
-    // i.e.: createMyClassName()
+    public function createAntelopeTable(): AntelopeTable
+    {
+        return new AntelopeTable(
+            $this->getAntelopePropelQuery()
+        );
+    }
 
-    // (For the Table part of the exercise)
-    // TODO-2: Provide the AntelopePropelQuery from the AntelopeGuiDependencyProvider
-    // Hint-1: Naming convention for methods getting things from somewhere else are prefixed by "get"
-    // i.e.: getMyClassName()
-    // Hint-2: Have a look at `src/Pyz/Zed/DataImport/Business/DataImportBusinessFactory.php::getCurrencyFacade()` for the right syntax
-
+    public function getAntelopePropelQuery(): PyzAntelopeQuery
+    {
+        return $this->getProvidedDependency(AntelopeGuiDependencyProvider::PROPEL_QUERY_ANTELOPE);
+    }
 
     public function createAntelopeCreateForm(AntelopeTransfer $antelopeTransfer, array $options = []): FormInterface
     {
         return $this->getFormFactory()->create(AntelopeCreateForm::class, $antelopeTransfer, $options);
     }
 
-    // (Later: For the Form part of the exercise)
-    // TODO-3: Provide the AntelopeFacade from the AntelopeGuiDependencyProvider
-    // Hint-1: Naming convention for methods getting things from somewhere else are prefixed by "get"
-    // i.e.: getMyClassName()
-    // Hint-2: Have a look at `src/Pyz/Zed/DataImport/Business/DataImportBusinessFactory.php::getCurrencyFacade()` for the right syntax
-    // Hint-3: Use the interface as return type
+    public function getAntelopeFacade(): AntelopeFacadeInterface
+    {
+        return $this->getProvidedDependency(AntelopeGuiDependencyProvider::FACADE_ANTELOPE);
+    }
 }

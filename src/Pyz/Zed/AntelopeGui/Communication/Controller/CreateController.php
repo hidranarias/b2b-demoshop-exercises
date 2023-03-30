@@ -20,20 +20,16 @@ class CreateController extends AbstractController
 
     public function indexAction(Request $request)
     {
-        // TODO-1: Get an AntelopeCreateForm-instance through the factory
-        $antelopeCreateForm = null;
-
         $antelopeCreateForm = $this->getFactory()
-            ->createAntelopeCreateForm(new AntelopeTransfer());
-
-        $antelopeCreateForm->handleRequest($request);
+            ->createAntelopeCreateForm(new AntelopeTransfer())
+            ->handleRequest($request);
 
         if ($antelopeCreateForm->isSubmitted() && $antelopeCreateForm->isValid()) {
             return $this->createAntelope($antelopeCreateForm);
         }
 
         return $this->viewResponse([
-            'antelopeCreateForm' => '', // TODO-2: Pass the created view of the form
+            'antelopeCreateForm' => $antelopeCreateForm->createView(),
             'backUrl' => $this->getAntelopeOverviewUrl(),
         ]);
     }
@@ -41,15 +37,15 @@ class CreateController extends AbstractController
     protected function createAntelope(FormInterface $antelopeCreateForm)
     {
         /** @var \Generated\Shared\Transfer\AntelopeTransfer|null $antelopeTransfer */
-        // TODO-3: Get the antelope-data from the form
-        $antelopeTransfer = null;
+        $antelopeTransfer = $antelopeCreateForm->getData();
 
-        // TODO-4: Persist the AntelopeTransfer through the AntelopeFacade
-        $antelopeTransfer = null;
+        $antelopeTransfer = $this->getFactory()
+            ->getAntelopeFacade()
+            ->createAntelope($antelopeTransfer);
 
         $this->addSuccessMessage(static::MESSAGE_ANTELOPE_CREATED_SUCCESS);
 
-        // TODO-5: Return a redirect-response to the antelope overview (table-view)
+        return $this->redirectResponse($this->getAntelopeOverviewUrl());
     }
 
     protected function getAntelopeOverviewUrl(): string

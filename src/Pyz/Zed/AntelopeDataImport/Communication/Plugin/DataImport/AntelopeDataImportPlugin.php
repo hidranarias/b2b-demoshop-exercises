@@ -13,7 +13,13 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class AntelopeDataImportPlugin extends AbstractPlugin implements DataImportPluginInterface
 {
-    // TODO: Implement the required interface methods
-    // Hint-1: `getFacade()` provides you the AntelopeDataImportFacade with import functionality
-    // Hint-2: AntelopeDataImportConfig provides a constant for the import type
+    public function import(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null): DataImporterReportTransfer
+    {
+        return $this->getFacade()->importAntelope($dataImporterConfigurationTransfer);
+    }
+
+    public function getImportType(): string
+    {
+        return AntelopeDataImportConfig::IMPORT_TYPE_ANTELOPE;
+    }
 }

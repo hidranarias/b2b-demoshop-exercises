@@ -11,15 +11,14 @@ class AntelopeWriterStep implements DataImportStepInterface
 {
     public function execute(DataSetInterface $dataSet): void
     {
-        // TODO-1: Find or create an instance of antelope entity
-        // Hint-1: PyzAntelopeQuery has a static method `create()`
-        // Hint-2: Filter by name by calling 'filterByName()' method
-        // Hint-3: `findOneOrCreate()` can be used to query one from the database or create a fresh entity
-        $antelopeEntity = null;
+        $antelopeEntity = PyzAntelopeQuery::create()
+            ->filterByName($dataSet[AntelopeDataSetInterface::COLUMN_NAME])
+            ->findOneOrCreate();
 
-        // TODO-2: Assign the color from the dataset to the entity by using the setter
+        $antelopeEntity->setColor($dataSet[AntelopeDataSetInterface::COLUMN_COLOR]);
 
-        // TODO-3: Save the entity ONLY if it's new or modified
-        // Hint: Take a look at `src/Orm/Zed/Antelope/Persistence/Base/PyzAntelope.php` for the right methods
+        if ($antelopeEntity->isNew() || $antelopeEntity->isModified()) {
+            $antelopeEntity->save();
+        }
     }
 }

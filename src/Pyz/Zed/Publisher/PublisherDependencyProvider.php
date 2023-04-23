@@ -7,6 +7,8 @@
 
 namespace Pyz\Zed\Publisher;
 
+use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
+use Pyz\Zed\AntelopeSearch\Communication\Plugin\Publisher\AntelopeWritePublisherPlugin;
 use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Shared\PublishAndSynchronizeHealthCheck\PublishAndSynchronizeHealthCheckConfig;
 use Spryker\Zed\AssetStorage\Communication\Plugin\Publisher\Asset\AssetDeletePublisherPlugin;
@@ -96,6 +98,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     protected function getPublisherPlugins(): array
     {
         return array_merge(
+            $this->getAntelopeSearchPlugins(),
             $this->getPublishAndSynchronizeHealthCheckPlugins(),
             $this->getGlossaryStoragePlugins(),
             $this->getProductRelationStoragePlugins(),
@@ -114,6 +117,16 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
         );
     }
 
+    public function getAntelopeSearchPlugins(): array
+    {
+        return [
+            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE => [
+                new AntelopeWritePublisherPlugin()
+            ]
+        ];
+    }
+    
+
     /**
      * @return array
      */
@@ -124,26 +137,6 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
                 new PublishAndSynchronizeHealthCheckStorageWritePublisherPlugin(),
                 new PublishAndSynchronizeHealthCheckSearchWritePublisherPlugin(),
             ],
-        ];
-    }
-
-    /**
-     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherTriggerPluginInterface>
-     */
-    protected function getPublisherTriggerPlugins(): array
-    {
-        return [
-            new GlossaryPublisherTriggerPlugin(),
-            new ProductRelationPublisherTriggerPlugin(),
-            new ProductAbstractLabelPublisherTriggerPlugin(),
-            new ProductLabelDictionaryPublisherTriggerPlugin(),
-            new ReturnReasonPublisherTriggerPlugin(),
-            new ProductBundlePublisherTriggerPlugin(),
-            new CategoryNodePublisherTriggerPlugin(),
-            new CategoryTreePublisherTriggerPlugin(),
-            new ProductCategoryPublisherTriggerPlugin(),
-            new CategoryPagePublisherTriggerPlugin(),
-            new ProductConfigurationPublisherTriggerPlugin(),
         ];
     }
 
@@ -327,6 +320,26 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             new ProductConcreteUpdatedMessageBrokerPublisherPlugin(),
             new ProductConcreteDeletedMessageBrokerPublisherPlugin(),
             new ProductAbstractUpdatedMessageBrokerPublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherTriggerPluginInterface>
+     */
+    protected function getPublisherTriggerPlugins(): array
+    {
+        return [
+            new GlossaryPublisherTriggerPlugin(),
+            new ProductRelationPublisherTriggerPlugin(),
+            new ProductAbstractLabelPublisherTriggerPlugin(),
+            new ProductLabelDictionaryPublisherTriggerPlugin(),
+            new ReturnReasonPublisherTriggerPlugin(),
+            new ProductBundlePublisherTriggerPlugin(),
+            new CategoryNodePublisherTriggerPlugin(),
+            new CategoryTreePublisherTriggerPlugin(),
+            new ProductCategoryPublisherTriggerPlugin(),
+            new CategoryPagePublisherTriggerPlugin(),
+            new ProductConfigurationPublisherTriggerPlugin(),
         ];
     }
 }

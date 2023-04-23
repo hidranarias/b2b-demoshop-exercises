@@ -3,20 +3,26 @@
 namespace Pyz\Zed\AntelopeDataImport\Business;
 
 use Generated\Shared\Transfer\DataImporterConfigurationTransfer;
+use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
+use Pyz\Zed\AntelopeDataImport\AntelopeDataImportDependencyProvider;
 use Pyz\Zed\AntelopeDataImport\Business\DataImportStep\AntelopeWriterStep;
 use Pyz\Zed\AntelopeDataImport\Business\DataImportStep\ColorToLowercaseStep;
 use Spryker\Zed\DataImport\Business\DataImportBusinessFactory;
 use Spryker\Zed\DataImport\Business\Model\DataImporterInterface;
+use Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException;
 
+/**
+ *
+ */
 class AntelopeDataImportBusinessFactory extends DataImportBusinessFactory
 {
     /**
-     * @param \Generated\Shared\Transfer\DataImporterConfigurationTransfer|null $dataImporterConfigurationTransfer
+     * @param DataImporterConfigurationTransfer|null $dataImporterConfigurationTransfer
      *
-     * @return \Spryker\Zed\DataImport\Business\Model\DataImporterInterface
+     * @return DataImporterInterface
      */
-    public function getAntelopeDataImport(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null): DataImporterInterface
-    {
+    public function getAntelopeDataImport(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null
+    ): DataImporterInterface {
         $dataImporter = $this->getCsvDataImporterFromConfig($dataImporterConfigurationTransfer);
 
         $dataSetStepBroker = $this->createTransactionAwareDataSetStepBroker();
@@ -29,7 +35,7 @@ class AntelopeDataImportBusinessFactory extends DataImportBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\AntelopeDataImport\Business\DataImportStep\ColorToLowercaseStep
+     * @return ColorToLowercaseStep
      */
     public function createColorToLowercaseStep(): ColorToLowercaseStep
     {
@@ -37,10 +43,19 @@ class AntelopeDataImportBusinessFactory extends DataImportBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\AntelopeDataImport\Business\DataImportStep\AntelopeWriterStep
+     * @return AntelopeWriterStep
      */
     public function createAntelopeWriterStep(): AntelopeWriterStep
     {
-        return new AntelopeWriterStep();
+        return new AntelopeWriterStep($this->getAntelopeFacade());
+    }
+
+    /**
+     * @return AntelopeFacadeInterface
+     * @throws ContainerKeyNotFoundException
+     */
+    public function getAntelopeFacade(): AntelopeFacadeInterface
+    {
+        return $this->getProvidedDependency(AntelopeDataImportDependencyProvider::FACADE_ANTELOPE);
     }
 }

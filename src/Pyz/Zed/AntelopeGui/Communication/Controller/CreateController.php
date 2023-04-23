@@ -36,7 +36,7 @@ class CreateController extends AbstractController
 
     protected function createAntelope(FormInterface $antelopeCreateForm)
     {
-        /** @var \Generated\Shared\Transfer\AntelopeTransfer|null $antelopeTransfer */
+        /** @var AntelopeTransfer|null $antelopeTransfer */
         $antelopeTransfer = $antelopeCreateForm->getData();
 
         $antelopeTransfer = $this->getFactory()

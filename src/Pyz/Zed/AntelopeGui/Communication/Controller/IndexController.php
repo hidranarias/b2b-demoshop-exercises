@@ -2,15 +2,18 @@
 
 namespace Pyz\Zed\AntelopeGui\Communication\Controller;
 
+use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
 /**
  * @method \Pyz\Zed\AntelopeGui\Communication\AntelopeGuiCommunicationFactory getFactory()
+ *  * @method \Pyz\Zed\Antelope\Business\AntelopeFacadeInterface getFacade()
  */
 class IndexController extends AbstractController
 {
     public function indexAction()
     {
+
         $table = $this->getFactory()
             ->createAntelopeTable();
 

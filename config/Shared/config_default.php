@@ -135,6 +135,7 @@ $config[RouterConstants::YVES_SSL_EXCLUDED_ROUTE_NAMES] = [
 $config[RouterConstants::ZED_SSL_EXCLUDED_ROUTE_NAMES] = [
     'healthCheck' => 'health-check/index',
 ];
+$config[RouterConstants::BACKOFFICE_IS_CACHE_ENABLED] = false;
 
 // >>> DEV TOOLS
 

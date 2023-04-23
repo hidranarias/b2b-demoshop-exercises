@@ -12,17 +12,15 @@ class AntelopeSearchFacade extends AbstractFacade implements AntelopeSearchFacad
     /**
      * {@inheritDoc}
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\EventEntityTransfer[] $eventTransfers
      *
      * @return void
+     * @api
+     *
      */
     public function writeCollectionByAntelopeEvents(array $eventTransfers): void
     {
-    //TODO . Call the getFactory() method to have an instance of the layer's factory
-    // and create an instance of the AntelopeSearchWriter
-    // call writeCollectionByAntelopeEvents and pass the $eventTransfers array
-
+        $this->getFactory()->createAntelopeSearchWriter()
+            ->writeCollectionByAntelopeEvents($eventTransfers);
     }
 }

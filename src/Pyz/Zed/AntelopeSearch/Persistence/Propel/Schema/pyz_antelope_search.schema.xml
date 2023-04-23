@@ -7,6 +7,7 @@
         <index name="pyz_antelope_search-fk_antelope">
             <index-column name="fk_antelope"/>
         </index>
+
         <behavior name="synchronization">
             <parameter name="resource" value="antelope"/>
             <parameter name="key_suffix_column" value="fk_antelope"/>

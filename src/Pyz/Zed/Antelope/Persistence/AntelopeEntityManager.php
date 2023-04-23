@@ -6,12 +6,15 @@ use Generated\Shared\Transfer\AntelopeTransfer;
 use Orm\Zed\Antelope\Persistence\PyzAntelope;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
+/**
+ *
+ */
 class AntelopeEntityManager extends AbstractEntityManager implements AntelopeEntityManagerInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\AntelopeTransfer $antelopeTransfer
+     * @param AntelopeTransfer $antelopeTransfer
      *
-     * @return \Generated\Shared\Transfer\AntelopeTransfer
+     * @return AntelopeTransfer
      */
     public function createAntelope(AntelopeTransfer $antelopeTransfer): AntelopeTransfer
     {

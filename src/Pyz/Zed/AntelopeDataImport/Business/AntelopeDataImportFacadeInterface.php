@@ -11,11 +11,12 @@ interface AntelopeDataImportFacadeInterface
      * Specification:
      *  - Imports antelopes
      *
+     * @param DataImporterConfigurationTransfer|null $dataImporterConfigurationTransfer
+     *
+     * @return DataImporterReportTransfer
      * @api
      *
-     * @param \Generated\Shared\Transfer\DataImporterConfigurationTransfer|null $dataImporterConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataImporterReportTransfer
      */
-    public function importAntelope(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null): DataImporterReportTransfer;
+    public function importAntelope(?DataImporterConfigurationTransfer $dataImporterConfigurationTransfer = null
+    ): DataImporterReportTransfer;
 }

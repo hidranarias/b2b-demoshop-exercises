@@ -7,9 +7,9 @@ use Generated\Shared\Transfer\AntelopeTransfer;
 interface AntelopeEntityManagerInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\AntelopeTransfer $antelopeTransfer
+     * @param AntelopeTransfer $antelopeTransfer
      *
-     * @return \Generated\Shared\Transfer\AntelopeTransfer
+     * @return AntelopeTransfer
      */
     public function createAntelope(AntelopeTransfer $antelopeTransfer): AntelopeTransfer;
 }

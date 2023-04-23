@@ -31,6 +31,8 @@ class AntelopeSearchBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(AntelopeSearchDependencyProvider::FACADE_EVENT_BEHAVIOR);
     }
 
+    // TODO-3: Create the getAntelopeFacade method here
+    // HINT.  use the getProvidedDependency method and provide the you used in the dependencyProvider class
     public function getAntelopeFacade(): AntelopeFacadeInterface
     {
         return $this->getProvidedDependency(AntelopeSearchDependencyProvider::FACADE_ANTELOPE);

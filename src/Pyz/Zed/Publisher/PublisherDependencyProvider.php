@@ -97,6 +97,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
      */
     protected function getPublisherPlugins(): array
     {
+        //TODO:-2. Add the method created at step 1 to the returned array : getAntelopeSearchPlugins()
         return array_merge(
             $this->getAntelopeSearchPlugins(),
             $this->getPublishAndSynchronizeHealthCheckPlugins(),
@@ -125,7 +126,17 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             ]
         ];
     }
-    
+    //TODO-1. Define a method called getAntelopeSearchPlugins()
+    // It should return an array whose key is the antelopeSearch's publish queue
+    // defined in `AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE`, and its value
+    //an instance of 'AntelopeWritePublisherPlugin'.
+    // As we can return more than one plugin, you should return array of arrays.
+    // Example:
+    // return [
+    //        'queuename'=> [
+    //            new MypluginPlugin(),
+    //       ],
+    //    ]
 
     /**
      * @return array

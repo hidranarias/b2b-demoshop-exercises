@@ -9,7 +9,6 @@ use Pyz\Zed\AntelopeDataImport\Business\DataImportStep\AntelopeWriterStep;
 use Pyz\Zed\AntelopeDataImport\Business\DataImportStep\ColorToLowercaseStep;
 use Spryker\Zed\DataImport\Business\DataImportBusinessFactory;
 use Spryker\Zed\DataImport\Business\Model\DataImporterInterface;
-use Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException;
 
 /**
  *
@@ -52,7 +51,7 @@ class AntelopeDataImportBusinessFactory extends DataImportBusinessFactory
 
     /**
      * @return AntelopeFacadeInterface
-     * @throws ContainerKeyNotFoundException
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getAntelopeFacade(): AntelopeFacadeInterface
     {

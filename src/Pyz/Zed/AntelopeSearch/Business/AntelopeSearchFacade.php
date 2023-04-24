@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\AntelopeSearch\Business;
 
+use Generated\Shared\Transfer\EventEntityTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -12,7 +13,7 @@ class AntelopeSearchFacade extends AbstractFacade implements AntelopeSearchFacad
     /**
      * {@inheritDoc}
      *
-     * @param \Generated\Shared\Transfer\EventEntityTransfer[] $eventTransfers
+     * @param EventEntityTransfer[] $eventTransfers
      *
      * @return void
      * @api
@@ -20,7 +21,11 @@ class AntelopeSearchFacade extends AbstractFacade implements AntelopeSearchFacad
      */
     public function writeCollectionByAntelopeEvents(array $eventTransfers): void
     {
-        $this->getFactory()->createAntelopeSearchWriter()
-            ->writeCollectionByAntelopeEvents($eventTransfers);
+        //TODO . Call the getFactory() method available in this class to get an instance
+        // of the `AntelopeSearchWriter` . The factory has a method which does exactly that.
+        // Call the appropriate method from the `AntelopeSearchWriter` instance to
+        // write the data provided inside the `$eventTransfers` `DTO`.
+        //EXAMPLE: $this->getFactory()->createMyObject()->callMyMethod($eventTransfers)
+      
     }
 }

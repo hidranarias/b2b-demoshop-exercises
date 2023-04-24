@@ -3,7 +3,6 @@
 namespace Pyz\Zed\AntelopeSearch\Communication\Plugin\Publisher;
 
 use Generated\Shared\Transfer\EventEntityTransfer;
-use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface;
 
@@ -24,7 +23,9 @@ class AntelopeWritePublisherPlugin extends AbstractPlugin implements PublisherPl
      */
     public function handleBulk(array $eventEntityTransfers, $eventName): void
     {
-        $this->getFacade()->writeCollectionByAntelopeEvents($eventEntityTransfers);
+        // TODO 1. Use the `getFacade()` method of this class to have access to the Module's facade and
+        //call its method meant to write the data provided by `$eventEntityTransfers`
+
     }
 
     /**
@@ -36,11 +37,17 @@ class AntelopeWritePublisherPlugin extends AbstractPlugin implements PublisherPl
      */
     public function getSubscribedEvents(): array
     {
+        //##### Add to the returned array all of the events we want to listen to:
+        //1. publish antelope
+        //2. Create antelope
+        //3. Update Antelope
+        // The strings are found as constants in the `AntelopeSearchConfig` class.
+        // For example
+        // return ['antelope publish', 'antelope create','antelope update',]
+        // Use the appropriate constants from that class
+
         return [
-            AntelopeSearchConfig::ANTELOPE_PUBLISH,
-            AntelopeSearchConfig::ENTITY_PYZ_ANTELOPE_CREATE,
-            AntelopeSearchConfig::ENTITY_PYZ_ANTELOPE_UPDATE,
-            AntelopeSearchConfig::ENTITY_PYZ_ANTELOPE_DELETE,
+
         ];
     }
 }

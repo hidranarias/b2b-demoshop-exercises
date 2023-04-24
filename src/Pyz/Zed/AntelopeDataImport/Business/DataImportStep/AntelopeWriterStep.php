@@ -4,7 +4,6 @@ namespace Pyz\Zed\AntelopeDataImport\Business\DataImportStep;
 
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Orm\Zed\Antelope\Persistence\PyzAntelope;
-use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
 use Pyz\Zed\Antelope\Business\AntelopeFacadeInterface;
 use Pyz\Zed\AntelopeDataImport\Business\DataSet\AntelopeDataSetInterface;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
@@ -47,7 +46,9 @@ class AntelopeWriterStep extends PublishAwareStep implements DataImportStepInter
 
         if ($antelopeEntity->isNew() || $antelopeEntity->isModified()) {
             $antelopeEntity->save();
-            $this->addPublishEvents(AntelopeSearchConfig::ANTELOPE_PUBLISH, $antelopeEntity->getIdAntelope());
+            //TODO 1: Call the `addPublishEvents` method
+            //- The first parameter is the antelope publish event name present in `AntelopeSearchConfig::ANTELOPE_PUBLISH`.
+            //- The second parameter is the antelope's ID present in the antelope's entity `$antelopeEntity`.
         }
     }
 }

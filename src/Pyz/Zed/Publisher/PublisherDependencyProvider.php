@@ -7,8 +7,6 @@
 
 namespace Pyz\Zed\Publisher;
 
-use Pyz\Shared\AntelopeSearch\AntelopeSearchConfig;
-use Pyz\Zed\AntelopeSearch\Communication\Plugin\Publisher\AntelopeWritePublisherPlugin;
 use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Shared\PublishAndSynchronizeHealthCheck\PublishAndSynchronizeHealthCheckConfig;
 use Spryker\Zed\AssetStorage\Communication\Plugin\Publisher\Asset\AssetDeletePublisherPlugin;
@@ -99,7 +97,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
     {
         //TODO:-2. Add the method created at step 1 to the returned array : getAntelopeSearchPlugins()
         return array_merge(
-            $this->getAntelopeSearchPlugins(),
+
             $this->getPublishAndSynchronizeHealthCheckPlugins(),
             $this->getGlossaryStoragePlugins(),
             $this->getProductRelationStoragePlugins(),
@@ -118,14 +116,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
         );
     }
 
-    public function getAntelopeSearchPlugins(): array
-    {
-        return [
-            AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE => [
-                new AntelopeWritePublisherPlugin()
-            ]
-        ];
-    }
+
     //TODO-1. Define a method called getAntelopeSearchPlugins()
     // It should return an array whose key is the antelopeSearch's publish queue
     // defined in `AntelopeSearchConfig::ANTELOPE_PUBLISH_SEARCH_QUEUE`, and its value
